@@ -4,6 +4,7 @@ from gspread_pandas import Spread, Client
 import streamlit as st
 # from streamlit_gsheets import GSheetsConnection
 from PIL import Image
+from st_keyup import st_keyup
 
 # Import logo
 
@@ -64,5 +65,10 @@ df = pd.DataFrame(google_sheet_to_df)
 
 display_sheet = st.data_editor(df.style.format(precision=3, thousands=None), use_container_width=True)
 
-# st.dataframe(all_results)
+col1, col2 = st.columns(2)
 
+with col1:
+    input_licenses = st_keyup("Enter Client")
+
+    if input_licenses:
+        st.write(len(df), "Licenses")
